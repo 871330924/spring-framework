@@ -67,6 +67,7 @@ public interface ApplicationContext extends EnvironmentCapable, ListableBeanFact
 
 	/**
 	 * Return a name for the deployed application that this context belongs to.
+	 *
 	 * @return a name for the deployed application, or the empty String by default
 	 */
 	String getApplicationName();
@@ -79,6 +80,7 @@ public interface ApplicationContext extends EnvironmentCapable, ListableBeanFact
 
 	/**
 	 * Return the timestamp when this context was first loaded.
+	 * 返回上下文第一次装载的时间开始时间
 	 * @return the timestamp (ms) when this context was first loaded
 	 */
 	long getStartupDate();
@@ -111,6 +113,23 @@ public interface ApplicationContext extends EnvironmentCapable, ListableBeanFact
 	 * never been called), or if the context has been closed already
 	 * @see ConfigurableApplicationContext#refresh()
 	 * @see ConfigurableApplicationContext#getBeanFactory()
+	 *
+	 *
+	 * 将AutowireCapableBeanFactory功能暴露出这个context，以供他人使用。
+	 * <p>
+	 * 	 这通常而言不由应用代码来使用，除非它想要用于初始化 存活于应用上下文之外的bean实例，但是又想要被spring托管这个bean的生命周期
+	 * 	 注：所以这个方法等于经常是给框架用的，需要好好看看。
+	 * </p>
+	 *
+	 *
+	 *
+	 *
+	 *
+	 *
+	 *
+	 *
+	 *
+	 *
 	 */
 	AutowireCapableBeanFactory getAutowireCapableBeanFactory() throws IllegalStateException;
 

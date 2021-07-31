@@ -33,6 +33,11 @@ import org.springframework.lang.Nullable;
  * this interface. It only serves as suggestion for bean definition
  * readers that want to follow standard naming conventions.
  *
+ * bean definition 读取器的简单接口，通过Resource类和字符串位置参数指定加载的方法
+ *
+ *
+ *
+ *
  * @author Juergen Hoeller
  * @since 1.1
  * @see org.springframework.core.io.Resource
@@ -43,6 +48,11 @@ public interface BeanDefinitionReader {
 	 * Return the bean factory to register the bean definitions with.
 	 * <p>The factory is exposed through the BeanDefinitionRegistry interface,
 	 * encapsulating the methods that are relevant for bean definition handling.
+	 *
+	 * 返回bean工厂以注册bean定义
+	 * <p>
+	 * 	工厂通过BeanDefinitionRegistry接口公开，封装了与bean定义处理相关的方法
+	 * </p>
 	 */
 	BeanDefinitionRegistry getRegistry();
 

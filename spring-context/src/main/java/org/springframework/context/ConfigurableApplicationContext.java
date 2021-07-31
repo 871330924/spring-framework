@@ -36,6 +36,12 @@ import org.springframework.lang.Nullable;
  * making them obvious to ApplicationContext client code. The present
  * methods should only be used by startup and shutdown code.
  *
+ * SPI接口将由大多数（如果不是所有）应用程序上下文实现
+ *
+ * <p>
+ * 这里封装了配置和生命周期方法以避免使它们对ApplicationContext客户端代码明显可见。
+ * 现在客户端代码应该只能执行启动和停止的代码。
+ * </p>
  * @author Juergen Hoeller
  * @author Chris Beams
  * @author Sam Brannen
@@ -49,6 +55,8 @@ public interface ConfigurableApplicationContext extends ApplicationContext, Life
 	 * @see org.springframework.context.support.AbstractXmlApplicationContext#setConfigLocation
 	 * @see org.springframework.web.context.ContextLoader#CONFIG_LOCATION_PARAM
 	 * @see org.springframework.web.servlet.FrameworkServlet#setContextConfigLocation
+	 *
+	 * 下面字符串内的每一个字符都可以被认为是多个上下文配置的分隔符
 	 */
 	String CONFIG_LOCATION_DELIMITERS = ",; \t\n";
 
@@ -97,7 +105,8 @@ public interface ConfigurableApplicationContext extends ApplicationContext, Life
 
 
 	/**
-	 * Set the unique id of this application context.
+	 * Set the unique id of this application context
+	 * 为上下文设置唯一的id
 	 * @since 3.0
 	 */
 	void setId(String id);
@@ -114,6 +123,7 @@ public interface ConfigurableApplicationContext extends ApplicationContext, Life
 
 	/**
 	 * Set the {@code Environment} for this application context.
+	 * 为这个上下文设置环境
 	 * @param environment the new environment
 	 * @since 3.1
 	 */
@@ -175,6 +185,13 @@ public interface ConfigurableApplicationContext extends ApplicationContext, Life
 	 * @throws BeansException if the bean factory could not be initialized
 	 * @throws IllegalStateException if already initialized and multiple refresh
 	 * attempts are not supported
+	 *
+	 * 加载或刷新配置的持久性表示，其中可能来自基于Java的配置、XML文件、properties文件或关系数据库模式或其他格式。
+	 *
+	 *
+	 *
+	 *
+	 *
 	 */
 	void refresh() throws BeansException, IllegalStateException;
 
@@ -204,6 +221,9 @@ public interface ConfigurableApplicationContext extends ApplicationContext, Life
 	/**
 	 * Determine whether this application context is active, that is,
 	 * whether it has been refreshed at least once and has not been closed yet.
+	 *
+	 * 确定此应用程序上下文是否处于活动状态，即，是否至少刷新过一次并且尚未关闭。
+	 *
 	 * @return whether the context is still active
 	 * @see #refresh()
 	 * @see #close()
@@ -229,6 +249,13 @@ public interface ConfigurableApplicationContext extends ApplicationContext, Life
 	 * @see #refresh()
 	 * @see #close()
 	 * @see #addBeanFactoryPostProcessor
+	 *
+	 * 返回这个上下文的内部的BeanFactory
+	 * <p>
+	 *     注意，不要用来后置处理BeanFactory，因为那些单例的bean早在此之前就已经被实例化了。
+	 *     使用BeanFactoryPostProcessor来处理BeanFactory在接触到Bean之前的一些内在逻辑。
+	 * </p>
+	 *
 	 */
 	ConfigurableListableBeanFactory getBeanFactory() throws IllegalStateException;
 
